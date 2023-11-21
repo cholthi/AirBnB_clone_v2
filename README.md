@@ -6,7 +6,7 @@ This repository builds a clone of the AirBnB website. The console commands allow
 
 <center><h3>Contents</h3> </center>
 
-1: Unit Testing [/tests](https://github.com/cholthi/AirBnB_clone_v2/tree/master/tests)
+1. Unit Testing [/tests](https://github.com/cholthi/AirBnB_clone_v2/tree/master/tests)
 
 2. Make BaseModel [/models/base_model.py](https://github.com/cholthi/AirBnB_clone_v2/tree/master/models/base_model.py)
 
