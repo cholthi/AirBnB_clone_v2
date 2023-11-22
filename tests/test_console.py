@@ -10,7 +10,8 @@ from models import storage
 
 
 classes = {'BaseModel', 'State', 'City', 'Place',
-        'Amenity','User', 'Review'}
+           'Amenity', 'User', 'Review'}
+
 
 class TestHBNBCmd_create(unittest.TestCase):
     """Unittest for testing create command and its args"""
@@ -52,7 +53,7 @@ class TestHBNBCmd_create(unittest.TestCase):
             console = HBNBCommand()
             with self.assertRaises(IndexError) as context:
                 self.assertTrue('IndexError' in context.msg)
-                #self.assertTrue(st, output.getvalue().strip())
+                # self.assertTrue(st, output.getvalue().strip())
 
     def test_do_create_invalid_class(self):
         """Tests do_create where class is invalid"""
@@ -96,4 +97,35 @@ class TestHBNBCmd_create(unittest.TestCase):
                 "create Place {}".format(params)))
             self.assertLess(0, len(output.getvalue().strip()))
             app.onecmd("show Place {}".format(output.getvalue().strip()))
-            self.assertNotIn('notexist="invalid"',output.getvalue().strip())
+            self.assertNotIn('notexist="invalid"', output.getvalue().strip())
+
+
+class TestHBNBCmd_show(unittest.TestCase):
+    def test_do_show_missing_arguments(self):
+        console = HBNBCommand()
+        console.onecmd("show")
+        self.assertEqual("(hbnb) ", console.prompt)
+
+    def test_do_show_invalid_class(self):
+        console = HBNBCommand()
+        console.onecmd("show InvalidClass 1234-1234-1234")
+        self.assertEqual("(hbnb) ", console.prompt)
+
+
+class TestHBNBCmd_all(unittest.TestCase):
+    def test_do_all_invalid_class(self):
+        console = HBNBCommand()
+        console.onecmd("all InvalidClass")
+        self.assertEqual("(hbnb) ", console.prompt)
+
+
+class TestHBNBCmd_destroy(unittest.TestCase):
+    def test_do_destroy_missing_arguments(self):
+        console = HBNBCommand()
+        console.onecmd("destroy")
+        self.assertEqual("(hbnb) ", console.prompt)
+
+    def test_do_destroy_invalid_class(self):
+        console = HBNBCommand()
+        console.onecmd("destroy InvalidClass 1234-1234-1234")
+        self.assertEqual("(hbnb) ", console.prompt)
