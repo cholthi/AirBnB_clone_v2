@@ -20,6 +20,9 @@ class BaseModel:
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             del kwargs['__class__']
+            kwargs = {k: v for k, v in kwargs.items()
+                      if k in type(self).__dict__ or
+                      k in ["id", "updated_at", "created_at"]}
             self.__dict__.update(kwargs)
 
     def __str__(self):
