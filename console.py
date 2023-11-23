@@ -125,20 +125,14 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        kwargs = {k: v.replace('_', ' ') for k, v in map(
-            lambda i: i.split('='), args[1:])}
-        kwargs['id'] = str(uuid.uuid4())
-        kwargs['created_at'] = datetime.now().isoformat()
-        kwargs['updated_at'] = datetime.now().isoformat()
-        kwargs['__class__'] = HBNBCommand.classes[args[0]].__name__
+        kwargs = {k: v.replace('_', ' ').replace('"', '\\"'
+            ) for k, v in map(lambda i: i.split('='), args[1:])}
         for k in kwargs:
             if k in HBNBCommand.types:
                 kwargs[k] = HBNBCommand.types[k](kwargs[k])
         new_instance = HBNBCommand.classes[args[0]](**kwargs)
-        storage.new(new_instance)
         storage.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
