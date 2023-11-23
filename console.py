@@ -125,8 +125,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        kwargs = {k: v.replace('_', ' ').replace('"', '\\"'
-            ) for k, v in map(lambda i: i.split('='), args[1:])}
+        kwargs = {k: v.replace('_', ' ').replace('"', '\\"')
+                  for k, v in map(lambda i: i.split('='), args[1:])}
         for k in kwargs:
             if k in HBNBCommand.types:
                 kwargs[k] = HBNBCommand.types[k](kwargs[k])

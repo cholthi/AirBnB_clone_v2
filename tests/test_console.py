@@ -17,10 +17,9 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-
 class TestConsole(unittest.TestCase):
     """Class that tests the console"""
-    
+
     def setUp(self):
         """Function empties file.json"""
         FileStorage._FileStorage__objects = {}
@@ -49,7 +48,7 @@ class TestConsole(unittest.TestCase):
         self.assertEqual(name, "Jonglei")
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create City name="Bor"'
-            ' state_id="495"')
+                                 ' state_id="495"')
         result = f.getvalue().strip()
         self.assertRegex(result, opt)
         name = storage.all()[f'City.{result}'].name
