@@ -17,12 +17,6 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-<<<<<<< HEAD
-classes = {'BaseModel', 'State', 'City', 'Place',
-           'Amenity', 'User', 'Review'}
-
-=======
->>>>>>> upstream/master
 
 class TestConsole(unittest.TestCase):
     """Class that tests the console"""
@@ -105,16 +99,6 @@ class TestConsole(unittest.TestCase):
         p = style.check_files(['console.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
-<<<<<<< HEAD
-    def test_do_create_missing_class(self):
-        """Tests do_create where class is missing"""
-        st = f"** class name missing **"
-        with patch("sys.stdout", new=StringIO()) as output:
-            console = HBNBCommand()
-            with self.assertRaises(IndexError) as context:
-                self.assertTrue('IndexError' in context.msg)
-                # self.assertTrue(st, output.getvalue().strip())
-=======
     def test_doc_console(self):
         self.assertIsNotNone(HBNBCommand.__doc__)
         self.assertIsNotNone(HBNBCommand.do_all.__doc__)
@@ -125,77 +109,7 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_count.__doc__)
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
         self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
->>>>>>> upstream/master
 
 
-<<<<<<< HEAD
-    def test_do_create_invalid_syntax(self):
-        """Tests do_create where syntax is invalid"""
-        st = f"*** Unknown syntax: .create."
-        with patch("sys.stdout", new=StringIO()) as output:
-            console = HBNBCommand()
-            self.assertFalse(console.onecmd(".create. "))
-            self.assertEqual(st, output.getvalue().strip())
-
-    def test_do_create_place_with_params(self):
-        """Tests creating objects with params"""
-        params = """city_id="0001" user_id="0001" name="My_little_house"
-        number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300
-        latitude=37.773972 longitude=-122.431297"""
-        with patch("sys.stdout", new=StringIO()) as output:
-            app = HBNBCommand()
-            self.assertFalse(app.onecmd(
-                "create Place {}".format(params)))
-            self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "Place.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
-            app.onecmd("show Place {}".format(output.getvalue().strip()))
-            self.assertIn('city_id', output.getvalue().strip())
-
-    def test_do_create_place_invalid_params_ignored(self):
-        params = """city_id="0001" user_id="0001"
-        name="My_little_house" number_rooms=4 number_bathrooms=2
-        max_guest=10 price_by_night=300 latitude=37.773972
-        longitude=-122.431297 notexist="invalid" """
-        with patch("sys.stdout", new=StringIO()) as output:
-            app = HBNBCommand()
-            self.assertFalse(app.onecmd(
-                "create Place {}".format(params)))
-            self.assertLess(0, len(output.getvalue().strip()))
-            app.onecmd("show Place {}".format(output.getvalue().strip()))
-            self.assertNotIn('notexist="invalid"', output.getvalue().strip())
-
-
-class TestHBNBCmd_show(unittest.TestCase):
-    def test_do_show_missing_arguments(self):
-        console = HBNBCommand()
-        console.onecmd("show")
-        self.assertEqual("(hbnb) ", console.prompt)
-
-    def test_do_show_invalid_class(self):
-        console = HBNBCommand()
-        console.onecmd("show InvalidClass 1234-1234-1234")
-        self.assertEqual("(hbnb) ", console.prompt)
-
-
-class TestHBNBCmd_all(unittest.TestCase):
-    def test_do_all_invalid_class(self):
-        console = HBNBCommand()
-        console.onecmd("all InvalidClass")
-        self.assertEqual("(hbnb) ", console.prompt)
-
-
-class TestHBNBCmd_destroy(unittest.TestCase):
-    def test_do_destroy_missing_arguments(self):
-        console = HBNBCommand()
-        console.onecmd("destroy")
-        self.assertEqual("(hbnb) ", console.prompt)
-
-    def test_do_destroy_invalid_class(self):
-        console = HBNBCommand()
-        console.onecmd("destroy InvalidClass 1234-1234-1234")
-        self.assertEqual("(hbnb) ", console.prompt)
-=======
 if __name__ == '__main__':
     unittest.main()
->>>>>>> upstream/master
