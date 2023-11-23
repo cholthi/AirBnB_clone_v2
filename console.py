@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         args = shlex.split(args)
-        if not args[0]:
+        if not args:
             print("** class name missing **")
             return
         elif args[0] not in HBNBCommand.classes:
