@@ -1,27 +1,22 @@
 #!/usr/bin/python3
-""" Generates a .tgz archive from contents of web_static"""
-
-from fabric.api import *
-from datetime import datetime
+"""Create and distributes an archive to web servers"""
 import os.path
+import time
+from fabric.api import local
+from fabric.operations import env, put, run
 
-
-env.hosts = ["54.209.202.246", "54.237.71.136"]
-env.user = "ubuntu"
+env.hosts = ['54.209.202.246', '54.237.71.136']
 
 
 def do_pack():
-    """generates a .tgz archive from web_static of this project"""
-    archive_dir = "web_static"
-    time_part = datetime.now().strftime("%Y%m%d%H%M%S")
-    archive_file = f"versions/{archive_dir}_{time_part}.tgz"
-    local('mkdir -p versions')
-    gzipt_archive_t = local('tar -czf {} {}/'.format(
-        archive_file, archive_dir))
-
-    if gzip_archive_t.succeeded:
-        return (archive_file)
-    else:
+    """Generate an tgz archive from web_static folder"""
+    try:
+        local("mkdir -p versions")
+        local("tar -cvzf versions/web_static_{}.tgz web_static/".
+              format(time.strftime("%Y%m%d%H%M%S")))
+        return ("versions/web_static_{}.tgz".format(time.
+                                                    strftime("%Y%m%d%H%M%S")))
+    except:
         return None
 
 
@@ -48,9 +43,9 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Deploys static website to live servers"""
+    """Create and distributes an archive to web servers"""
     try:
-        remote_archive_path = do_pack()
-        return (do_deploy(remote_archive_path))
+        path = do_pack()
+        return do_deploy(path)
     except:
         return False
