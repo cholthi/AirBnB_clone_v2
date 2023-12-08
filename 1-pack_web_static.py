@@ -6,14 +6,11 @@ from fabric.api import local
 
 def do_pack():
     """ Generates an archive file using web_static"""
-
-    filename = strftime("%Y%m%d%H%M%S")
     try:
+        tme = time.strftime('%Y%m%d%H%M%S')
         local("mkdir -p versions")
-        local("tar -czvf versions/web_static_{}.tgz web_static/"
-              .format(filename))
-
-        return "versions/web_static_{}.tgz".format(filename)
-
-    except Exception as e:
-        return None
+        local("tar -czvf versions/web_static_{}.tgz web_static/".format(tme))
+        filename = "versions/web_static_{}.tgz web_static/".format(tme)
+    except Exception:
+        pass
+    return filename
