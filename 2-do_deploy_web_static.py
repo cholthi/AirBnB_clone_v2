@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ Generates a .tgz archive from contents of web_static"""
 
-from fabric.api import local
+from fabric.api import *
 from datetime import datetime
-import os
+import os.path
 
 
 env.hosts = ["54.209.202.246", "54.237.71.136"]
