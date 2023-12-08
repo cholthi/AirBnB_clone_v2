@@ -3,7 +3,7 @@
 
 from fabric.api import *
 from datetime import datetime
-import os
+import os.path
 
 
 env.hosts = ["54.209.202.246", "54.237.71.136"]
@@ -11,7 +11,7 @@ env.user = "ubuntu"
 
 def do_pack():
     """generates a .tgz archive from web_static of this project"""
-    archive_dir = "./web_static"
+    archive_dir = "web_static"
     time_part = datetime.now().strftime("%Y%m%d%H%M%S")
     archive_file = f"versions/{archive_dir}_{time_part}.tgz"
     try:
@@ -47,7 +47,8 @@ def do_deploy(archive_path):
 
 def deploy():
     """Deploys static website to live servers"""
-    remote_archive_path = do_pack()
-    if remote_archive_path:
-        return(do_deploy(remote_archive_path))
-    return False
+    try:
+         remote_archive_path = do_pack()
+         return(do_deploy(remote_archive_path))
+    except:
+        return False
