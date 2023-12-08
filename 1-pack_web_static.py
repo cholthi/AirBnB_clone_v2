@@ -7,8 +7,7 @@ from fabric.api import local
 
 
 def do_pack():
-    """Generates an archive
-    """
+    """Generates an archive."""
     filename = None
     try:
         tme = time.strftime('%Y%m%d%H%M%S')
