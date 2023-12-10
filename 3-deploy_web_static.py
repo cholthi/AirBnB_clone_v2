@@ -59,6 +59,7 @@ def do_deploy(archive_path):
         False
     return True
 
+
 def deploy():
     """ full deployment function """
     try:
