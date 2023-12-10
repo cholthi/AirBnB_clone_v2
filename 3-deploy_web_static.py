@@ -59,11 +59,11 @@ def do_deploy(archive_path):
         False
     return True
 
-
 def deploy():
-    """ creates and distributes an archive to web servers """
-    arch_file = do_pack()
-    if arch_file is not None:
-        return do_deploy(arch_file)
-    else:
+    """ full deployment function """
+    try:
+        save_path = do_pack()
+        deploy_res = do_deploy(save_path)
+        return (deploy_res)
+    except:
         return False
