@@ -6,24 +6,24 @@ env.hosts = ['35.168.3.7', '100.25.170.135']
 
 
 def do_clean(number=0):
-    """ deletes out-of-date archives """
-    archive_files = sorted(os.listdir("versions"))
-    
-    number = int(number) if int(number) != 0 else 1
+    """Delete out-of-date archives.
 
-    # clean archives from versions folder
+    Args:
+        number (int): The number of archives to keep.
 
-    for i in range(number):
-        archive_files.pop()
-    # clean local hidden files
+    If number is 0 or 1, keeps only the most recent archive. If
+    number is 2, keeps the most and second-most recent archives,
+    etc.
+    """
+    number = 1 if int(number) == 0 else int(number)
+
+    archives = sorted(os.listdir("versions"))
+    [archives.pop() for i in range(number)]
     with lcd("versions"):
-        for arch in archive_files:
-            local("rm ./{}".format(arch))
-    # clean host
+        [local("rm ./{}".format(a)) for a in archives]
+
     with cd("/data/web_static/releases"):
-        archive_files = run("ls -tr").split()
-        archive_files = [ar for ar in archive_files if "web_static_" in ar]
-        for i in range(number):
-            archive_files.pop()
-        for arch in archive_files:
-            run("sudo rm -rf ./{}".format(arch))
+        archives = run("ls -tr").split()
+        archives = [a for a in archives if "web_static_" in a]
+        [archives.pop() for i in range(number)]
+        [run("rm -rf ./{}".format(a)) for a in archives]
