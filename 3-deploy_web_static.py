@@ -7,8 +7,23 @@ import time
 
 
 env.hosts = ['35.168.3.7', '100.25.170.135']
-env.user = 'ubuntu'
-env.key_filename = '~/.ssh/school'
+
+
+def do_pack():
+    """ A script to generate archive the contents of web_static folder"""
+
+    tme = time.strftime("%Y%m%d%H%M%S")
+    filename = None
+    try:
+        local("mkdir -p versions")
+        local("tar -czvf versions/web_static_{}.tgz web_static/"
+              .format(tme))
+
+        filename = "versions/web_static_{}.tgz".format(tme)
+
+    except Exception:
+        pass
+    return filename
 
 
 def do_deploy(archive_path):
@@ -44,26 +59,10 @@ def do_deploy(archive_path):
     return True
 
 
-def do_pack():
-    """ A script to generate archive the contents of web_static folder"""
-
-    tme = time.strftime("%Y%m%d%H%M%S")
-    filename = None
-    try:
-        local("mkdir -p versions")
-        local("tar -czvf versions/web_static_{}.tgz web_static/"
-              .format(tme))
-
-        filename = "versions/web_static_{}.tgz".format(tme)
-
-    except Exception:
-        pass
-    return filename
-
-
 def deploy():
     """ creates and distributes an archive to web servers """
     arch_file = do_pack()
-    if arch_file:
+    if arch_file is not None:
         return do_deploy(arch_file)
-    return False
+    else:
+        return False
