@@ -65,5 +65,5 @@ def deploy():
         save_path = do_pack()
         deploy_res = do_deploy(save_path)
         return (deploy_res)
-    except:
+    except Exception as e:
         return False
