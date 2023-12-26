@@ -7,17 +7,17 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/", strict_slashes=True)
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
     """View handler for root url"""
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=True)
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """ Returns text response"""
     return "HNBN"
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
