@@ -28,7 +28,7 @@ def displayC(text):
     """
     returns 'C' followed by the value of the text
     """
-    txt = text.replace(i'_', ' ')
+    txt = text.replace('_', ' ')
     return "C " + txt
 
 
