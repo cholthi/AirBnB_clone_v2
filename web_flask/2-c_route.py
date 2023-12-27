@@ -24,11 +24,11 @@ def hbnb():
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def displayC():
+def displayC(text):
     """
     returns 'C' followed by the value of the text
     """
-    txt = text.replace('_', ' ')
+    txt = text.replace(i'_', ' ')
     return "C " + txt
 
 
