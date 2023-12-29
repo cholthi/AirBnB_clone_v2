@@ -23,6 +23,7 @@ class State(BaseModel, Base):
         cities = relationship("City", cascade='all, delete, delete-orphan',
                               backref="state")
     else:
+        name = ""
         @property
         def cities(self):
             """
