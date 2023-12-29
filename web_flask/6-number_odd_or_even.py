@@ -67,7 +67,7 @@ def oddOrEven(n):
         prop = 'even'
     else:
         prop = 'odd'
-    return render_template('5-number.html', n=n, prop=prop) 
+    return render_template('5-number.html', n=n, prop=prop)
 
 
 if __name__ == '__main__':
