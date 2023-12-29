@@ -17,14 +17,12 @@ class State(BaseModel, Base):
         """
         super().__init__(*args, **kwargs)
 
-    if isinstance(models.storage, models.engine.db_storage.DBStorage):
+    if models.storage_type == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade='all, delete, delete-orphan',
                               backref="state")
     else:
-        name = ""
-
         @property
         def cities(self):
             """
