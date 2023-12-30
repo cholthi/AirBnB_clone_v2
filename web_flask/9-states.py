@@ -16,7 +16,7 @@ def states_list():
     """
     all_states = storage.all(State)
     return render_template('9-states.html',
-                          all_states=all_states, mode='all')
+                           all_states=all_states, mode='all')
 
 
 @app.route('/states/<id>', strict_slashes=False)
@@ -28,9 +28,10 @@ def state_by_id(id):
     for state in all_states:
         if state.id == id:
             return render_template('9-states.html',
-                                  all_states=all_states, mode='id')
+                                   all_states=all_states, mode='id')
     return render_template('9-states.html',
-                          all_states=all_states, mode='none')
+                           all_states=all_states, mode='none')
+
 
 @app.teardown_appcontext
 def teardown_db(arg=None):
