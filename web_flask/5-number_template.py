@@ -39,11 +39,11 @@ def is_number(n):
     """Returns a text response"""
     return f'{n} is a number'
 
+
 @app.route('/number_template/<int:n>', strict_slashes=True)
 def number_template(n):
     """Returns a html encoded response"""
     return render_template('5-number.html', n=n)
-
 
 
 if __name__ == '__main__':
