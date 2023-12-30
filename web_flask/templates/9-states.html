@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<HEAD>
+		<TITLE>HBNB</TITLE>
+	</HEAD>
+	<BODY>
+		{% if not state_id %}
+		<H1>States</H1>
+		<ul>
+			{% for state in all_states.values()|sort(attribute='name') %}
+			<li>{{ state.id }}: <b>{{ state.name }}</b>
+			</li>
+			{% endfor %}
+		</ul>
+
+		{% elif state_id in states %}
+		{% set state = all_states[state_id] %}
+		<H1>States: {{state.name}}</H1>
+		<h3>Cities</h3>
+		<ul>
+			{% for cty in state.cities|sort(attribute='name') %}
+			<li>{{ city.id }}: <b>{{ city.name }}</b>
+			</li>
+			{% endfor %}
+		</ul>
+		
+		{% else %}
+		<h1>Not found!</h1>
+		{% endif %}
+	</BODY>
+</HTML>
