@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """create a unique FileStorage instance for your application"""
-from os import getenv
+from os import environ
 from models.engine.db_storage import DBStorage
 from models.engine.file_storage import FileStorage
 from models.city import City
@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 
-storage_type = getenv("HBNB_TYPE_STORAGE")
+storage_type = environ.get('HBNB_TYPE_STORAGE')
 if storage_type == "db":
     storage = DBStorage()
 else:
