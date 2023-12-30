@@ -30,7 +30,7 @@ class FileStorage:
                     ret_dict[k] = self.__objects[k]
             return ret_dict
         else:
-            return FileStorage.__objects
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
