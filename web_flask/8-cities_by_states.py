@@ -14,8 +14,7 @@ def states_list():
     """
     display a HTML page
     """
-    all_states = sorted(storage.all(State).values(),
-                        key=lambda state: state.name)
+    all_states = storage.all(State)
     return render_template('8-cities_by_states.html', all_states=all_states)
 
 
