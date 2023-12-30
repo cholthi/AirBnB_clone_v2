@@ -16,21 +16,19 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage
-           Args
-              cls: The type of class to return
-           Return: dict
+        """returns a dictionary
+        Return:
+            returns a dictionary of __object
         """
-        if cls:
-            ret_dict = {}
-            all_objects = self.__objects
-            for k in all_objects:
-                clsname = k.partition('.')[0]
-                if clsname == cls.__name__:
-                    ret_dict[k] = self.__objects[k]
-            return ret_dict
-        else:
+        if not cls:
             return self.__objects
+        else:
+            dic_result = {}
+            for key, val in self.__objects.items():
+                name = key.split('.')
+                if name[0] == cls.__name__:
+                    dic_result.update({key: val})
+            return dic_result
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
