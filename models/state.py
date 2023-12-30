@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+from os import environ
 from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
@@ -16,21 +17,22 @@ class State(BaseModel, Base):
     cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
 
-    def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
+    if environ.get('HBNB_TYPE_STORAGE') == "db":
+        cities = relationship("City", backref="state",
+                              cascade="all, delete, delete-orphan")
 
-    @property
-    def cities(self):
-        var = models.storage.all()
-        lista = []
-        result = []
-        for key in var:
-            city = key.replace('.', ' ')
-            city = shlex.split(city)
-            if (city[0] == 'City'):
-                lista.append(var[key])
-        for elem in lista:
-            if (elem.state_id == self.id):
-                result.append(elem)
-        return (result)
+    else:
+       @property
+       def cities(self):
+           var = models.storage.all()
+           lista = []
+           result = []
+           for key in var:
+               city = key.replace('.', ' ')
+               city = shlex.split(city)
+               if (city[0] == 'City'):
+                  lista.append(var[key])
+           for elem in lista:
+               if (elem.state_id == self.id):
+                  result.append(elem)
+           return (result)
