@@ -11,6 +11,7 @@ from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 
+
 storage_type = environ.get('HBNB_TYPE_STORAGE')
 if storage_type == "db":
     storage = DBStorage()
