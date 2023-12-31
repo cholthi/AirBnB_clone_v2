@@ -11,6 +11,9 @@ from models.user import User
 from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class DBStorage:
