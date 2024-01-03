@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
             if k in HBNBCommand.types:
                 kwargs[k] = HBNBCommand.types[k](kwargs[k])
         new_instance = HBNBCommand.classes[args[0]](**kwargs)
-        storage.save()
+        new_instance.save()
         print(new_instance.id)
 
     def help_create(self):
