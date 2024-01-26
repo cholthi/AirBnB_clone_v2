@@ -8,7 +8,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/", strict_slashes=True)
+@app.route("/airbnb-onepage/", strict_slashes=True)
 def hello_hbnb():
     """View handler for root url"""
     return "Hello HBNB!"
